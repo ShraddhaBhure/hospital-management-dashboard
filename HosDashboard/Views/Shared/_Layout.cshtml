@@ -12,7 +12,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Dashboard-WebApp</title>
+    <title>Lotus Hospital</title>
 
     <link rel="icon" type="image/x-icon" href="~/assets/img/lotuslogo.png">
 
@@ -156,8 +156,32 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-header">Hospital Details</li>
-               
-
+                <li class="nav-header">User Manegement</li>
+                <li class="nav-item">
+                    <a asp-action="LoginPage2" asp-controller="Login" class="nav-link">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                          Login Page
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a asp-action="Index" asp-controller="Login" class="nav-link">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                          Registered  Users
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a asp-action="Create" asp-controller="Login" class="nav-link">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            Create  Users
+                        </p>
+                    </a>
+                </li>
+             
                 <li class="nav-header">Doctors</li>
                 <li class="nav-item">
                     <a asp-action="AllDoctors" asp-controller="Doctor" class="nav-link">

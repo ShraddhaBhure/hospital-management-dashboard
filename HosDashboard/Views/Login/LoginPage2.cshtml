@@ -1,106 +1,85 @@
 ﻿@model HS.Models.UserLogin
 
+@{
+    if (Layout != null)
+    {
+        Layout = null;
+    }
+}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>ELearning_Login</title>
+    <title>LotusHospital_Login</title>
+
     <link rel="icon" type="image/x-icon" href="~/assets/img/lotuslogo.png">
-   
 
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome Icons -->
-
+    <!-- CSS -->
     <link href="~/Assets/plugins/fontawesome-free/css/all.min.css" rel="stylesheet" />
     <link href="~/Assets/dist/css/adminlte.css" rel="stylesheet" />
-    <link href="~/Assets/dist/css/adminlte.min.css" rel="stylesheet" />
-    <!-- IonIcons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <!-- Theme style -->
-
-
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-NFtjKoDkwgV7Savz5H5o7ZkKj1bImi4Oq3w4tVXLjDkLd7swYzC48JV+7V5JgZBOO7V0bbMQGxl1F/P29ffxQw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 </head>
 
 <body class="hold-transition sidebar-mini body-bg">
 
+    <section class="h-100 gradient-form" style="background-color: #eee;">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-xl-10">
+                    <div class="card rounded-3 text-black">
+                        <div class="row g-0">
+                            <div class="col-lg-6">
+                                <div class="card-body p-md-5 mx-md-4">
+                                    <div class="text-center">
+                                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp" style="width: 185px;" alt="logo">
+                                        <h4 class="mt-1 mb-5 pb-1">We are The Lotus Hospital Team</h4>
+                                    </div>
 
-<section class="h-100 gradient-form" style="background-color: #eee;">
-    <div class="container py-5 h-100">
-        <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col-xl-10">
-                <div class="card rounded-3 text-black">
-                    <div class="row g-0">
-                        <div class="col-lg-6">
-                            <div class="card-body p-md-5 mx-md-4">
-
-                                <div class="text-center">
-                                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
-                                         style="width: 185px;" alt="logo">
-                                    <h4 class="mt-1 mb-5 pb-1">We are The Lotus Team</h4>
-                                </div>
-
-                                    <form method="post" asp-controller="Login" asp-action="LoginPage2">
-                                    <p>Please login to your account</p>
-
-                                    <div class="form-outline mb-4">
-
-
-
-                                        <input type="email" id="form2Example11" class="form-control"
-                                               placeholder="Phone number or email address" />
-                                        <label class="form-label" for="form2Example11">Username</label>
-                                            @Html.TextBoxFor(m => m.Username, new { @placeholder = "Enter Username" })
+                                    @using (Html.BeginForm("LoginPage2", "Login", FormMethod.Post))
+                                    {
+                                        <p>Please login to your account</p>
+                                        <div class="form-outline mb-4">
+                                            <input type="text" id="Username" name="Username" class="form-control" placeholder="Phone number or email address" />
                                         </div>
-
-                                    <div class="form-outline mb-4">
-                                        <input type="password" id="form2Example22" class="form-control" />
-                                            @Html.TextBoxFor(m => m.Password, new { @placeholder = "Enter Password", @id = "passwordInput" })
-                                            <label class="form-label" for="form2Example22">Password</label>
-                                    </div>
-
-                                    <div class="text-center pt-1 mb-5 pb-1">
-                                      
-                                            <button type="submit" class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3">Login</button>
-
-                                        <a class="text-muted" href="#!">Forgot password?</a>
-                                    </div>
-
-                                    <div class="d-flex align-items-center justify-content-center pb-4">
-                                        <p class="mb-0 me-2">Don't have an account?</p>
-                                        <button type="button" class="btn btn-outline-danger">Create new</button>
-                                    </div>
-
-                                </form>
-
+                                        <div class="form-outline mb-4">
+                                            <input type="password" id="Password" name="Password" class="form-control" placeholder="Password" />
+                                        </div>
+                                        <div class="text-center pt-1 mb-5 pb-1">
+                                            <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit">Log in</button>
+                                            <a class="text-muted" href="#!">Forgot password?</a>
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-center pb-4">
+                                            <p class="mb-0 me-2">Don't have an account?</p>
+                                            <br />
+                                            <br />
+                                            <button type="button" class="btn btn-outline-danger" asp-action="CreateUser" asp-controller="Login">Create new</button>
+                                            @Html.ActionLink("Create New User", "CreateUser")
+                                        </div>
+                                    }
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
-                            <div class="text-white px-3 py-4 p-md-5 mx-md-4">
-                                <h4 class="mb-4">We are more than just a company</h4>
-                                <p class="small mb-0">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                </p>
+                            <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+                                <div class="text-white px-3 py-4 p-md-5 mx-md-4">
+                                    <h1>Hospital Management Dashboard</h1>
+                                    <h4 class="mb-4">For the welfare of People</h4>
+                                    <p class="small mb-0">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-      </section>
-    <!-- Modal -->
-    <!-- Password eye button -->
+    <!-- JavaScript -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
@@ -123,47 +102,7 @@
         });
     </script>
 
-
-
-    <!-- Data Form Partial View -->
-    <!-- jQuery -->
-    <script src="~/Assets/jquery/jquery.min.js"></script>
-    <script src="~/Assets/jquery/jquery.js"></script>
-    <script src="~/Assets/plugins/bootstrap/js/bootstrap.js"></script>
-    <script src="~/Assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <script src="~/Assets/dist/js/adminlte.js"></script>
-    @*@await Component.InvokeAsync("Notyf")*@
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" type="text/javascript"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" type="text/javascript"></script>
-
-    @if (TempData["toast"] != null)
-    {
-        <script>
-            // Display toast notification
-            Toastify({
-                text: "@TempData["toast"]",
-                duration: 3000,
-                newWindow: true,
-                close: true,
-                gravity: "top",
-                position: "right",
-                backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
-                stopOnFocus: true
-            }).showToast();
-        </script>
-    }
+    <!-- Other scripts -->
 
 </body>
 </html>
-
-
-
-
-
-
-
-
