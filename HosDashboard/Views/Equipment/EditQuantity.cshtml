@@ -1,0 +1,250 @@
+﻿@*@model EquipmentViewModel
+
+    <h2>Purchase Equipment</h2>
+
+    <form asp-action="Edit">
+        <div class="form-group">
+            <label asp-for="EquipmentName" class="control-label"></label>
+            <input asp-for="EquipmentName" class="form-control" readonly />
+        </div>
+        <div class="form-group">
+            <label asp-for="ManufacturerName" class="control-label"></label>
+            <input asp-for="ManufacturerName" class="form-control" readonly />
+        </div>
+        <div class="form-group">
+            <label asp-for="ModelNumber" class="control-label"></label>
+            <input asp-for="ModelNumber" class="form-control" readonly />
+        </div>
+        <div class="form-group">
+            <label asp-for="Quantity" class="control-label"></label>
+            <input asp-for="Quantity" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Price" class="control-label"></label>
+            <input asp-for="Price" class="form-control" readonly />
+        </div>
+        <div>
+
+
+            <label class="control-label">Total Price:</label>
+            <label id="TotalPrice" class="control-label"></label>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Save" class="btn btn-primary" />
+            <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+        </div>
+    </form>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            // Get the quantity and price inputs
+            var quantityInput = $('#Quantity');
+            var priceInput = $('#Price');
+
+            // Get the total price label
+            var totalPriceLabel = $('#TotalPrice');
+
+            // Calculate the total price and set it as the label text
+            function calculateTotalPrice() {
+                var quantity = parseInt(quantityInput.val());
+                var price = parseFloat(priceInput.val());
+                var totalPrice = quantity * price;
+
+                totalPriceLabel.text(totalPrice.toFixed(2));
+            }
+
+            // Calculate the total price on page load
+            calculateTotalPrice();
+
+            // Calculate the total price when the quantity or price changes
+            quantityInput.on('input', calculateTotalPrice);
+            priceInput.on('input', calculateTotalPrice);
+        });
+    </script>*@
+
+
+@model HS.Models.EquipmentViewModel
+
+<h2>Purchase Equipment</h2>
+<form id="orderForm">
+    <div class="form-group">
+        <label asp-for="EquipmentName" class="control-label"></label>
+        <input asp-for="EquipmentName" class="form-control" readonly />
+    </div>
+    <div class="form-group">
+        <label asp-for="ManufacturerName" class="control-label"></label>
+        <input asp-for="ManufacturerName" class="form-control" readonly />
+    </div>
+    <div class="form-group">
+        <label asp-for="ModelNumber" class="control-label"></label>
+        <input asp-for="ModelNumber" class="form-control" readonly />
+    </div>
+    <div class="form-group">
+        <label asp-for="Quantity" class="control-label"></label>
+        <input asp-for="Quantity" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Price" class="control-label"></label>
+        <input asp-for="Price" class="form-control" readonly />
+    </div>
+    <div>
+        <label class="control-label">Total Price:</label>
+        <label id="TotalPrice" class="control-label"></label>
+
+    </div>
+    <!-- HTML code -->
+    <div>
+        <label for="dropdown"> Purchase Dept :</label>
+        <select id="dropdown">
+            <option value="option1">Cardiology Dept</option>
+            <option value="option2">Emergency Dept</option>
+            <option value="option3">OBGYN Dep</option>
+        </select>
+    </div>
+
+    <div>
+        <label for="input-text">PurchaseAuthority:</label>
+        <input type="text" id="input-text" class="form-control">
+    </div>
+
+    <div>
+        <label class="control-label">Order Date</label>
+        <label id="orderdate" class="control-label"></label>
+    </div>
+
+    <div class="form-group">
+        <button type="button" id="saveOrder" class="btn btn-primary">Save</button>
+        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+    </div>
+</form>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    // get the current date and format it
+    var currentDate = new Date();
+    var formattedDate = currentDate.toLocaleDateString();
+
+    // set the label text to the formatted date
+    document.getElementById("orderdate").textContent = formattedDate;
+</script>
+
+<script>
+    $(document).ready(function () {
+        // Get the quantity and price inputs
+        var quantityInput = $('#Quantity');
+        var priceInput = $('#Price');
+
+        // Get the total price label
+        var totalPriceLabel = $('#TotalPrice');
+
+        // Calculate the total price and set it as the label text
+        function calculateTotalPrice() {
+            var quantity = parseInt(quantityInput.val());
+            var price = parseFloat(priceInput.val());
+            var totalPrice = quantity * price;
+
+            totalPriceLabel.text(totalPrice.toFixed(2));
+        }
+
+        // Calculate the total price on page load
+        calculateTotalPrice();
+
+        // Calculate the total price when the quantity or price changes
+        quantityInput.on('input', calculateTotalPrice);
+        priceInput.on('input', calculateTotalPrice);
+    });
+</script>
+
+<script>
+    // JavaScript code
+    const inputText = document.getElementById("input-text");
+    const dropdown = document.getElementById("dropdown");
+
+    inputText.addEventListener("input", function () {
+        // Get the text entered by the user
+        const text = inputText.value;
+        console.log("Text entered: " + text);
+    });
+
+    dropdown.addEventListener("change", function () {
+        // Get the selected option from the dropdown
+        const selectedOption = dropdown.options[dropdown.selectedIndex].value;
+        console.log("Selected option: " + selectedOption);
+    });
+
+</script>
+<script>
+$(document).ready(function () {
+  $('#SaveOrder').click(function () {
+    var order = {
+      EquipmentName: $('#EquipmentName').val(),
+      ManufacturerName: $('#ManufacturerName').val(),
+      ModelNumber: $('#ModelNumber').val(),
+      Quantity: $('#Quantity').val(),
+      PricePerUnit: $('#Price').val(),
+      TotalPrice: $('#TotalPrice').text(),
+      PurchaseDept: $('#dropdown option:selected').text(),
+      PurchaseAuthority: $('#input-text').val(),
+      PurchaseDate: $('#orderdate').text()
+    };
+
+    $.ajax({
+      url: '/Equipment/SaveOrder',
+      type: 'POST',
+      dataType: 'json',
+      data: JSON.stringify(order),
+      contentType: 'application/json; charset=utf-8',
+      success: function (result) {
+        alert('Order saved successfully!');
+        window.location.href = '/Equipment/Index';
+      },
+      error: function (xhr, status, error) {
+        alert('Error saving order: ' + error);
+      }
+    });
+  });
+});
+
+</script>
+
+
+@*@section scripts{*@
+<!--<script>
+        $(document).ready(function () {
+            $('#Quantity').on('input', function () {
+                var price = parseFloat($('#Price').val());
+                var quantity = parseInt($('#Quantity').val());
+                var totalPrice = price * quantity;
+                $('#TotalPrice').text(totalPrice.toFixed(2));
+            });        $('#saveOrder').click(function () {
+            var order = {
+                EquipmentId: @Model.EquipmentId,
+                EquipmentName: '@Model.EquipmentName',
+                ManufacturerName: '@Model.ManufacturerName',
+                ModelNumber: '@Model.ModelNumber',
+                Quantity: parseInt($('#Quantity').val()),
+                PricePerUnit: parseFloat($('#Price').val()),
+                TotalPrice: parseFloat($('#TotalPrice').text()),
+                PurchaseDept: '',
+                PurchaseAuthority: '',
+                PurchaseDate: ''
+            };
+
+            $.ajax({
+                type: 'POST',
+                url: '/Order/SaveOrder',
+                data: order,
+                success: function () {
+                    window.location.href = '/Order/Index';
+                },
+                error: function () {
+                    alert('An error occurred while saving the order.');
+                }
+            });
+        });
+    });
+</script>-->
+@*}*@

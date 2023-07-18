@@ -1,0 +1,36 @@
+﻿@model HS.Models.VisitedPatient
+@{
+    ViewData["Title"] = "Visited Patients by Year";
+}
+
+<div id="chart-container"></div>
+
+@*@section scripts {*@
+    <script src="https://cdn.anychart.com/releases/8.10.0/js/anychart-base.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/8.10.0/js/anychart-exports.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/8.10.0/js/anychart-vml.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/8.10.0/js/anychart-ui.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/8.10.0/js/anychart-data-adapter.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            var chartData = @Html.Raw(ViewBag.ChartData);
+
+            var dataSet = anychart.data.set(chartData);
+
+            var chart = anychart.column();
+
+            chart.title("Visited Patients by Year, Gender, and Department");
+
+            chart.yAxis().title("Patient Count");
+
+            chart.xAxis().title("Visit Year");
+
+            chart.data(dataSet);
+
+            chart.container("chart-container");
+
+            chart.draw();
+        });
+    </script>
+

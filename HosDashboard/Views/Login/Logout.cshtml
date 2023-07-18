@@ -1,0 +1,10 @@
+﻿<h2>Logout</h2>
+
+@using (Html.BeginForm("Logout", "Login", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <p>Are you sure you want to logout?</p>
+
+    <button type="submit" class="btn btn-danger">Logout</button>
+}

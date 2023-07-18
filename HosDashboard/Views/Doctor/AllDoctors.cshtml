@@ -1,0 +1,56 @@
+﻿@using System.Data;
+@model IEnumerable<HS.Models.Doctor>
+
+@{
+    ViewData["Title"] = "Doctor";
+    int sl = 1;
+}
+<div class="row">
+    <div class="col-lg-12">
+        <a class="btn btn-primary mb-2 float-right" asp-area="" asp-controller="Doctor" asp-action="Add">Add Doctor</a>
+    </div>
+</div>
+<div class="table-responsive-sm">
+
+    @if (ViewBag.msg != null)
+    {
+        <div class="row">
+            <div class="col-md-12 text-center  bg-danger">
+                <span class="text-light">@ViewBag.msg</span>
+                <span class="text-light float-right">x</span>
+            </div>
+        </div>
+    }
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr class="table-primary">
+                <th scope="col">Sl No.</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email Id</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Specialist</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+
+            <tr>
+                <th scope="row">@sl.</th>
+                <td>@item.Name</td>
+                <td>@item.Email</td>
+                <td>@item.Phone</td>
+                <td>@item.Specialist</td>
+                <td>
+                    <a asp-action="Details" asp-controller="Doctor" asp-route-id="@item.Id" class="btn btn-primary">View</a>
+                    <a asp-action="Edit" asp-controller="Doctor" asp-route-id="@item.Id" class="btn btn-primary">Edit</a>
+                    <a asp-action="AllDoctors" asp-controller="Doctor" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+                sl++;
+            }
+
+        </tbody>
+    </table>
+</div>

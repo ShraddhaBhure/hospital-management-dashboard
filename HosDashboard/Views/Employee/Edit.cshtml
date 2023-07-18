@@ -1,0 +1,103 @@
+﻿@model HS.Models.tblEmployee
+
+    @{
+        ViewData["Title"] = "Employee";
+    }
+    <style>
+        img {
+            height: 71px;
+            width: 71px;
+            padding: 5px;
+        }
+
+        .card-header {
+            background-color: #b8daff;
+        }
+    </style>
+    <section>
+        <div class="row">
+            <div class="col-lg-12">
+                <a class="btn btn-primary mb-2 float-right" asp-area="" asp-controller="Employee" asp-action="AllEmployees">All Employees</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h2>Edit Employee</h2>
+            </div>
+            <div class="card-body">
+                <form asp-action="Edit" asp-controller="Employee" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        @if (ViewBag.msg != null)
+                        {
+                            <div class="row bg-success">
+                                <div class="col-lg-12 text-center">
+                                    <span class="text-light">@ViewBag.msg</span>
+                                    <span class="text-light float-right">x</span>
+                                </div>
+                            </div>
+                        }
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <label asp-for="Name"></label>
+                                <input type="text" class="form-control" id="txtName" asp-for="Name">
+                            </div>
+                            <div class="col-lg-6">
+                                <label asp-for="Email"></label>
+                                <input type="email" class="form-control" id="txtEmail" asp-for="Email" placeholder="">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-lg-6">
+                                <label asp-for="Phone"></label>
+                                <input type="text" class="form-control" id="txtPhone" asp-for="Phone">
+                            </div>
+                            <div class="col-lg-4">
+                                <label asp-for="Photo"></label>
+                                <input type="file" class="form-control" id="txtPhoto" asp-for="Photo">
+                            </div>
+                            <div class="col-lg-2">
+                                <input type="hidden" asp-for="PhotoPath" value="@Model.PhotoPath" />
+                                <img src="~/ProfileImage/@Model.PhotoPath" alt="" />
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-lg-3">
+                                <label asp-for="Gender"></label>
+                                <select class="form-control" asp-for="Gender">
+                                    <option value="">--Select Gender--</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Other">Other</option>
+
+                                </select>
+                            </div>
+                            <div class="col-lg-3">
+                                <label asp-for="DOB"></label>
+                                <input type="date" class="form-control" id="txtDob" asp-for="DOB">
+                            </div>
+                            <div class="col-lg-6">
+                                <label asp-for="Salary"></label>
+                                <input type="text" class="form-control" id="txtSalary" asp-for="Salary">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+
+                            <div class="col-lg-12">
+                                <label asp-for="Address"></label>
+                                <textarea class="form-control" id="txtName" asp-for="Address" rows="3"></textarea>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-lg-12">
+                                <input type="submit" class="btn btn-primary float-right" value="Save" />
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+    </section>

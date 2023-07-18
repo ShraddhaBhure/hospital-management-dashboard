@@ -1,0 +1,43 @@
+﻿@model List<HS.Models.Nurse>
+
+<h1>Nurses</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>DOB</th>
+            <th>Phone</th>
+            <th>Gender</th>
+            <th>Specialist</th>
+            <th>CreatedDate</th>
+            <th>Salary</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var nurse in Model)
+        {
+            <tr>
+                <td>@nurse.Id</td>
+                <td>@nurse.Name</td>
+                <td>@nurse.Email</td>
+                <td>@nurse.DOB.ToShortDateString()</td>
+                <td>@nurse.Phone</td>
+                <td>@nurse.Gender</td>
+                <td>@nurse.Specialist</td>
+                <td>@nurse.CreatedDate.ToShortDateString()</td>
+                <td>@nurse.Salary</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@nurse.Id">Details</a>
+                    <a asp-action="Edit" asp-route-id="@nurse.Id">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@nurse.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Create" class="btn btn-primary">Add Nurse</a>

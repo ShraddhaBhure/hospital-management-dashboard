@@ -1,0 +1,133 @@
+﻿@model HS.Models.Modelforchart.ChartViewModel
+
+<h2>@Model.Title</h2>
+
+<div>
+    <canvas id="myChart"></canvas>
+</div>
+
+@section scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        var chartData = {
+            labels: [@foreach (var series in Model.Series) {
+                <text>"@series.DataPoints.FirstOrDefault()?.XValue",</text>
+            }],
+            datasets: [
+                @foreach (var series in Model.Series) {
+                    <text>{
+                        label: "@series.Name",
+                        data: [@foreach (var dataPoint in series.DataPoints) {
+                            <text>@dataPoint.YValue,</text>
+                        }],
+                        backgroundColor: "@string.Format("#{0:X6}", new Random().Next(0x1000000))",
+                        borderColor: "@string.Format("#{0:X6}", new Random().Next(0x1000000))",
+                        borderWidth: 1
+                    },</text>
+                }
+            ]
+        };
+
+        var chartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        };
+
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: chartData,
+            options: chartOptions
+        });
+    </script>
+}
+
+
+
+<!-- Include the required Chart.js library -->
+<!--<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>-->
+<!-- Define a canvas element for the chart -->
+<!--<canvas id="myChart"></canvas>-->
+<!-- Create a script block to generate the chart -->
+<!--<script>
+    // Get the chart data from the model
+    var chartData = @Html.Raw(Json.Serialize(Model));
+
+    // Create an empty array for the chart datasets
+    var chartDatasets = [];
+
+    // Loop through each chart series and create a dataset for it
+    chartData.series.forEach(function (series) {
+        var dataset = {
+            label: series.name,
+            data: [],
+            backgroundColor: getRandomColor(),
+            borderColor: getRandomColor(),
+            borderWidth: 1
+        };
+
+        // Loop through each data point and add it to the dataset
+        series.dataPoints.forEach(function (dataPoint) {
+            dataset.data.push({
+                x: dataPoint.x,
+                y: dataPoint.y
+            });
+        });
+
+        // Add the dataset to the array
+        chartDatasets.push(dataset);
+    });
+
+    // Create a chart object
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            datasets: chartDatasets
+        },
+        options: {
+            responsive: true,
+            scales: {
+                xAxes: [{
+                    type: 'time',
+                    time: {
+                        unit: 'year',
+                        displayFormats: {
+                            year: 'YYYY'
+                        }
+                    },
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Year'
+                    }
+                }],
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    },
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Number of Patients'
+                    }
+                }]
+            }
+        }
+    });
+
+    // Function to generate a random color
+    function getRandomColor() {
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+</script>-->

@@ -1,0 +1,43 @@
+﻿@model HS.Models.VisitedPatient
+@{
+    ViewData["Title"] = "Visited Patients by Year";
+}
+
+@{
+    ViewBag.Title = "Chart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div id="chart"></div>
+    </div>
+</div>
+<!-- AnyChart library -->
+<script src="https://cdn.anychart.com/releases/8.10.0/js/anychart-core.min.js"></script>
+<script src="https://cdn.anychart.com/releases/8.10.0/js/anychart-exports.min.js"></script>
+<script src="https://cdn.anychart.com/releases/8.10.0/js/anychart-heatmap.min.js"></script>
+<script src="https://cdn.anychart.com/releases/8.10.0/js/anychart-data-adapter.min.js"></script>
+
+<!-- AnyChart CSS -->
+<!--<link href="https://cdn.anychart.com/releases/8.10.0/css/anychart-ui.min.css" rel="stylesheet">
+
+<!--section scripts{-->
+    <script>
+        var chartData = @Html.Raw(ViewBag.ChartData);
+
+        var chart = anychart.column();
+
+        chart.data(chartData);
+
+        chart.title("Visited Patients by Year, Gender, and Department");
+
+        var seriesCount = chartData.reduce(function (count, item) {
+            return count.indexOf(item.Gender) === -1 ? count.concat([item.Gender]) : count;
+        }, []).length;
+
+        var chartWidth = Math.max(800, seriesCount * 100);
+
+        chart.container("chart").draw();
+    </script>
+@*}*@
