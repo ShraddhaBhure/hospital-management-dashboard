@@ -23,34 +23,7 @@ namespace HS.Services
             return await _dbContext.Nurses.ToListAsync();
         }
 
-        //public async Task InsertNurseAsync(Nurse nurse)
-        //{
-        //    nurse.CreatedDate = DateTime.Now;
-
-        //    await _dbContext.Nurses.AddAsync(nurse);
-        //    await _dbContext.SaveChangesAsync();
-        //}
-
-        //public async Task UpdateNurseAsync(Nurse nurse)
-        //{
-        //    var existingNurse = await _dbContext.Nurses.FirstOrDefaultAsync(n => n.Id == nurse.Id);
-
-        //    if (existingNurse != null)
-        //    {
-        //        existingNurse.Name = nurse.Name;
-        //        existingNurse.Email = nurse.Email;
-        //        existingNurse.Password = nurse.Password;
-        //        existingNurse.DOB = nurse.DOB;
-        //        existingNurse.Phone = nurse.Phone;
-        //        existingNurse.Gender = nurse.Gender;
-        //        existingNurse.Specialist = nurse.Specialist;
-        //        existingNurse.Salary = nurse.Salary;
-        //        existingNurse.PhotoPath = nurse.PhotoPath;
-
-        //        await _dbContext.SaveChangesAsync();
-        //    }
-        //}
-
+        
         public async Task InsertNurseAsync(Nurse nurse)
         {
             nurse.CreatedDate = DateTime.Now;
